@@ -4,14 +4,14 @@
   "description": "Stream language",
   "main": "index.js",
   "scripts": {
-    "preinstall": "sh install.sh",
+    "postinstall": "sh install.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joel Walker",
   "license": "ISC",
   "dependencies": {
+    "antlr4": "^4.7.0",
     "child-process-promise": "^2.2.1",
-    "fs-promise": "^2.0.2",
-    "bar": "file:./antlr4/runtime/JavaScript/src/antlr4/"
+    "fs-promise": "^2.0.2"
   }
 }
