@@ -8,5 +8,4 @@ curl http://www.antlr.org/download/antlr-4.6-complete.jar -o bin/antlr-4.6-compl
 cd antlr4/runtime/JavaScript/src/antlr4/
     npm install
 cd -
-npm link antlr4/runtime/JavaScript/src/antlr4/
 
