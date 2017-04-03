@@ -5,7 +5,7 @@ tokens { INDENT, DEDENT }
 WS : [ \t\n\r]+ -> skip;
 
 main
-    : body
+    : body # MainBody
     ;
 
 block
@@ -20,47 +20,47 @@ body
     ;
 
 statement
-    : l_value ASSIGN r_value # ExplicitAssignment
-    | l_value LASSIGN r_value # ExplicitAssignment
-    | r_value RASSIGN l_value # ExplicitAssignment
-    | r_value # ImplicitAssignment
+    : lValue ASSIGN rValue # AssignmentStatement
+    | lValue LASSIGN rValue # AssignmentStatement
+    | rValue RASSIGN lValue # AssignmentStatement
+    | rValue # ExpressionStatement
     | /* empty */ # EmptyStatement
     ;
 
-l_value
-    : /* empty */
-    | identifier
+lValue
+    : /* empty */ # ImplicitLValue
+    | identifier # IdentifierLValue
     ;
 
-r_value
+rValue
     : composition
-    | left_flow
-    | right_flow
+    | leftFlow
+    | rightFlow
     ;
 
-left_flow
+leftFlow
     : composition LMAP composition
     | composition LCALL composition
-    | composition LMAP left_flow
-    | composition LCALL left_flow
+    | composition LMAP leftFlow
+    | composition LCALL leftFlow
     ;
 
-right_flow
+rightFlow
     : composition RMAP composition
     | composition RCALL composition
-    | right_flow RMAP composition
-    | right_flow RCALL composition
+    | rightFlow RMAP composition
+    | rightFlow RCALL composition
     ;
 
 composition
-    : func_expr
-    | composition COMPOSE func_expr
+    : funcExpr
+    | composition COMPOSE funcExpr
     ;
 
-func_expr
+funcExpr
     : molecule
-    | func_expr molecule
-    | func_expr IDENT PAIR_SEP molecule
+    | funcExpr molecule
+    | funcExpr IDENT PAIR_SEP molecule
     ;
 
 molecule
@@ -81,7 +81,7 @@ identifier
     | PUBLIC_MOD IDENT
     | PRIVATE_MOD IDENT
     | UNBOUND_MOD IDENT
-    | CARET_MOD IDENT
+    | SLASH_MOD IDENT
     ;
 
 IDENT : [a-zA-Z_] [a-zA-Z0-9_]*;
@@ -114,4 +114,4 @@ PROP_ACCESS : '.';
 PUBLIC_MOD : '+';
 PRIVATE_MOD : '-';
 UNBOUND_MOD : '.';
-CARET_MOD : '^';
+SLASH_MOD : '/';
