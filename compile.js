@@ -27,5 +27,4 @@ module.exports = function(input) {
 };
 
 let res = module.exports('{}');
-process.stdout.write(res);
-process.stdout.write('\n');
+console.log(res);

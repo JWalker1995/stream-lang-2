@@ -1,12 +1,14 @@
 let transformers = {};
 
-let node_types = {};
-node_types.block = require('./ast/block');
+import AstBlock = require('./ast/block');
+
+let node_types = {
+    'block': AstBlock,
+};
 
 class AstBuilder {
-    constructor(init_func) {
-        this._init_func = init_func;
-        this._calls = [];
+    private calls: Array<Function>;
+    constructor(private init_func: Function) {
     }
 
     static create(node_type_key) {

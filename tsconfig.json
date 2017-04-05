@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "./build",
+        "target": "es5",
+        "noEmitOnError": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "module": "commonjs"
+    },
+    "include": [
+        "./*"
+    ]
+}
